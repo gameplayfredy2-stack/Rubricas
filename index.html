@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio de Cinemática Predictiva - Clase 16</title>
+    <!-- Carga de KaTeX para renderizado elegante de fórmulas matemáticas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #d69e2e;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Estilo del botón de descarga */
+        .actions-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .btn-pdf {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-pdf:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* Encabezados y Secciones */
+        h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-top: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 16px;
+        }
+
+        .subtitle {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
+        /* Campos de identificación del estudiante */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            background-color: #edf2f7;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-full {
+            grid-column: span 2;
+        }
+
+        .field label {
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #718096;
+        }
+
+        .line-input {
+            border-bottom: 1px dashed #a0aec0;
+            min-height: 20px;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Listas y Pasos */
+        ol, ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Caja de Coevaluación */
+        .coeval-box {
+            border: 2px dashed var(--accent-color);
+            background-color: #fffaf0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 30px;
+        }
+
+        .coeval-title {
+            font-weight: bold;
+            color: #975a16;
+            margin-bottom: 10px;
+        }
+
+        /* Reglas de Impresión para generar el PDF limpio */
+        @media print {
+            body {
+                background-color: #ffffff;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .actions-bar {
+                display: none; /* Oculta el botón de descarga en el PDF resultante */
+            }
+
+            .page-break {
+                page-break-before: always; /* Fuerza salto de página antes de la rúbrica al imprimir */
+            }
+
+            th {
+                background-color: #1a365d !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .info-grid {
+                background-color: #edf2f7 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .coeval-box {
+                background-color: #fffaf0 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Botón para descargar en PDF mediante ventana de impresión del sistema -->
+        <div class="actions-bar">
+            <button class="btn-pdf" onclick="window.print()">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                </svg>
+                Guardar como PDF
+            </button>
+        </div>
+
+        <!-- SECCIÓN 1: GUÍA DE LABORATORIO -->
+        <h1>Guía de Laboratorio: Cinemática Predictiva</h1>
+        <div class="subtitle">Bloque 1: Proyecto "Misión Punto A a Punto B" — Clase 16 (LAB - 55 min)</div>
+
+        <div class="info-grid">
+            <div class="field field-full">
+                <label>Integrantes del Equipo:</label>
+                <div class="line-input"></div>
+            </div>
+            <div class="field">
+                <label>Equipo N°:</label>
+                <div class="line-input"></div>
+            </div>
+            <div class="field">
+                <label>Fecha:</label>
+                <div class="line-input"></div>
+            </div>
+        </div>
+
+        <h2>🎯 Objetivo de la Práctica</h2>
+        <p>Determinar experimentalmente la velocidad media de un objeto en movimiento mediante el análisis gráfico de posición contra tiempo (\(x \text{ vs. } t\)), y utilizar la ecuación lineal del modelo para predecir analíticamente su posición en un tiempo no medido.</p>
+
+        <h2>📝 Procedimiento y Registro de Datos</h2>
+
+        <h3>Paso 1: Toma de Datos Experimentales</h3>
+        <ol>
+            <li>Establezcan su marco de referencia fijando el <strong>Punto A</strong> como \(x_0 = 0\text{ m}\) en \(t_0 = 0\text{ s}\).</li>
+            <li>Desplacen el objeto hacia el <strong>Punto B</strong> y registren el tiempo empleado al pasar por al menos 4 marcas intermedias de distancia.</li>
+        </ol>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 40%;">Punto / Marca</th>
+                    <th style="width: 30%;">Posición \(x\text{ (m)}\)</th>
+                    <th style="width: 30%;">Tiempo \(t\text{ (s)}\)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Punto A (Origen)</strong></td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Marca 1</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Marca 2</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Marca 3</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Marca 4 (Punto B)</strong></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Paso 2: Análisis Gráfico y Cálculo de la Pendiente</h3>
+        <ol>
+            <li>En la hoja de papel milimetrado, tracen el gráfico de <strong>Posición vs. Tiempo</strong>:
+                <ul>
+                    <li><strong>Eje Y (Vertical):</strong> Posición \(x\text{ (m)}\)</li>
+                    <li><strong>Eje X (Horizontal):</strong> Tiempo \(t\text{ (s)}\)</li>
+                </ul>
+            </li>
+            <li>Tracen la <strong>recta de mejor ajuste</strong> que pase por la mayoría de los puntos experimentales.</li>
+            <li>Seleccionen dos puntos sobre la recta ajustada \((t_1, x_1)\) y \((t_2, x_2)\) que <em>no necesariamente sean puntos medidos directamente</em>.</li>
+            <li>Calculen la pendiente, la cual representa la <strong>velocidad media</strong> (\(\bar{v}\)):</li>
+        </ol>
+
+        <p style="text-align: center; margin: 20px 0;">
+            \[\bar{v} = \frac{\Delta x}{\Delta t} = \frac{x_2 - x_1}{t_2 - t_1}\]
+        </p>
+        <p><strong>Resultado del Cálculo:</strong> \(\bar{v} =\) _______________________ \(\text{m/s}\)</p>
+
+        <h3>Paso 3: Modelo Matemático y Predicción Analítica</h3>
+        <ol>
+            <li>Escriban la ecuación lineal del movimiento para su proyecto:
+                <p style="text-align: center;">\[x(t) = x_0 + \bar{v} \cdot t\]</p>
+            </li>
+            <li><strong>Desafío de Predicción:</strong> Utilicen la ecuación construida para calcular analíticamente la posición del objeto en un tiempo hipotético no medido \(t_{\text{predicción}} = 15\text{ s}\) (o el tiempo indicado por el docente):
+                <p style="text-align: center;">\[x(15\text{ s}) = \text{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ } \text{m}\]</p>
+            </li>
+        </ol>
+
+        <!-- Salto de página forzado al imprimir/generar el PDF -->
+        <div class="page-break"></div>
+
+        <!-- SECCIÓN 2: RÚBRICA DE EVALUACIÓN -->
+        <h2>📊 Rúbrica de Evaluación: Clase 16 (LAB)</h2>
+        <p><strong>Puntuación Máxima:</strong> 20 Puntos (Convertible a escala 100%)</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Criterio</th>
+                    <th style="width: 20%;">Sobresaliente (5 pts)</th>
+                    <th style="width: 20%;">Satisfactorio (4 pts)</th>
+                    <th style="width: 20%;">En Proceso (3 pts)</th>
+                    <th style="width: 20%;">Requiere Mejora (2 pts)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Toma y Registro de Datos</strong></td>
+                    <td>Registra correctamente 5 pares de datos \((x, t)\) con unidades del SI. Datos con rigor y coherencia.</td>
+                    <td>Registra de 4 a 5 pares con pequeñas omisiones de unidades o imprecisiones menores.</td>
+                    <td>Registra solo 3 pares de datos o presenta errores constantes en unidades.</td>
+                    <td>Registro incompleto (menos de 3 puntos) o sin unidades de medida.</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Trazo y Rigor Gráfico</strong></td>
+                    <td>Gráfica con escala adecuada, ejes etiquetados \((x\text{ [m]}, t\text{ [s]})\) e incluye recta de mejor ajuste.</td>
+                    <td>Gráfica completa, pero la escala no aprovecha bien el espacio o faltan etiquetas.</td>
+                    <td>Puntos graficados correctamente, pero unió puntos segmento a segmento sin recta de ajuste.</td>
+                    <td>Trazo impreciso, sin escala clara ni alineación entre datos y ejes.</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Cálculo de la Pendiente (\(\bar{v}\))</strong></td>
+                    <td>Selecciona 2 puntos sobre la recta, desglosa la fórmula algebraicamente, máximo 2 decimales y unidades (\(\text{m/s}\)).</td>
+                    <td>Calcula la pendiente correctamente pero omite unidades intermedias o no redondea a 2 decimales.</td>
+                    <td>Confunde variables al calcular la pendiente (\(\frac{\Delta t}{\Delta x}\)) o usa puntos fuera de la recta.</td>
+                    <td>Error matemático grave en el cálculo de la pendiente o ausencia de procedimiento.</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Modelo y Capacidad Predictiva</strong></td>
+                    <td>Construye la ecuación lineal \(x(t)\) correctamente y determina la posición teórica solicitada.</td>
+                    <td>Plantea la ecuación, pero comete un error aritmético menor en la sustitución.</td>
+                    <td>Realiza la predicción por estimación visual en la gráfica sin procedimiento analítico.</td>
+                    <td>No construye la ecuación del modelo ni realiza la predicción requerida.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Caja de Coevaluación -->
+        <div class="coeval-box">
+            <div class="coeval-title">📌 Formato para Coevaluación (Rally de Crítica de Pares)</div>
+            <p><em>Nota adhesiva de revisión rápida colocada por el equipo evaluador:</em></p>
+            <p><strong>Evaluadores (Equipo N°):</strong> _______</p>
+            <p><strong>Check de Pendiente:</strong> [ &nbsp; ] Correcta &nbsp;&nbsp;&nbsp;&nbsp; [ &nbsp; ] Requiere ajuste</p>
+            <p><strong>Comentario técnico:</strong> ____________________________________________________________________</p>
+        </div>
+    </div>
+
+</body>
+</html>
