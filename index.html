@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laboratorio de Cinemática Predictiva - Clase 16</title>
-    <!-- Carga de KaTeX para renderizado elegante de fórmulas matemáticas -->
+    <!-- Carga de KaTeX para renderizado de fórmulas matemáticas -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
@@ -54,9 +54,6 @@
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             transition: background-color 0.2s ease;
         }
 
@@ -72,6 +69,7 @@
             padding-bottom: 10px;
             margin-top: 0;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         h2 {
@@ -80,6 +78,8 @@
             margin-top: 30px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
         h3 {
@@ -171,6 +171,8 @@
             font-weight: bold;
             color: #975a16;
             margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 14px;
         }
 
         /* Reglas de Impresión para generar el PDF limpio */
@@ -187,11 +189,11 @@
             }
 
             .actions-bar {
-                display: none; /* Oculta el botón de descarga en el PDF resultante */
+                display: none;
             }
 
             .page-break {
-                page-break-before: always; /* Fuerza salto de página antes de la rúbrica al imprimir */
+                page-break-before: always;
             }
 
             th {
@@ -218,13 +220,9 @@
 <body>
 
     <div class="container">
-        <!-- Botón para descargar en PDF mediante ventana de impresión del sistema -->
+        <!-- Botón para descargar en PDF -->
         <div class="actions-bar">
             <button class="btn-pdf" onclick="window.print()">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                </svg>
                 Guardar como PDF
             </button>
         </div>
@@ -248,10 +246,10 @@
             </div>
         </div>
 
-        <h2>🎯 Objetivo de la Práctica</h2>
+        <h2>Objetivo de la Práctica</h2>
         <p>Determinar experimentalmente la velocidad media de un objeto en movimiento mediante el análisis gráfico de posición contra tiempo (\(x \text{ vs. } t\)), y utilizar la ecuación lineal del modelo para predecir analíticamente su posición en un tiempo no medido.</p>
 
-        <h2>📝 Procedimiento y Registro de Datos</h2>
+        <h2>Procedimiento y Registro de Datos</h2>
 
         <h3>Paso 1: Toma de Datos Experimentales</h3>
         <ol>
@@ -324,11 +322,11 @@
             </li>
         </ol>
 
-        <!-- Salto de página forzado al imprimir/generar el PDF -->
+        <!-- Salto de página para el PDF -->
         <div class="page-break"></div>
 
         <!-- SECCIÓN 2: RÚBRICA DE EVALUACIÓN -->
-        <h2>📊 Rúbrica de Evaluación: Clase 16 (LAB)</h2>
+        <h2>Rúbrica de Evaluación: Clase 16 (LAB)</h2>
         <p><strong>Puntuación Máxima:</strong> 20 Puntos (Convertible a escala 100%)</p>
 
         <table>
@@ -375,7 +373,7 @@
 
         <!-- Caja de Coevaluación -->
         <div class="coeval-box">
-            <div class="coeval-title">📌 Formato para Coevaluación (Rally de Crítica de Pares)</div>
+            <div class="coeval-title">Formato para Coevaluación (Rally de Crítica de Pares)</div>
             <p><em>Nota adhesiva de revisión rápida colocada por el equipo evaluador:</em></p>
             <p><strong>Evaluadores (Equipo N°):</strong> _______</p>
             <p><strong>Check de Pendiente:</strong> [ &nbsp; ] Correcta &nbsp;&nbsp;&nbsp;&nbsp; [ &nbsp; ] Requiere ajuste</p>
